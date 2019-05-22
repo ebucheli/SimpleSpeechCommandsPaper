@@ -12,37 +12,46 @@ from Utilities import make_oh
 from RNNetworks import CRNN1_1D
 from tensorflow.keras.optimizers import Adam
 
-import sys
+#import sys, getopt
 
-path = sys.argv[1]
+import click
 
-def main(path_dataset):
-    
+@click.command()
+@click.option('--path',default = '/home/edoardobucheli/TFSpeechCommands/train/audio',help='Path to the dataset')
+@click.option('--transformation',default = 0,help = 'The transformation to apply: 0 waveform, 1 Spectrogram, 2 Mel Spectrogram, 3 MFCC')
+@click.option('--network',default = 0,help = 'The network to use')
+@click.option('--train',default = True,help = 'train the model or use pretrained weights')
+
+
+
+def main(path, transformation, network, train):
+
+
     #Load dicts with commands and labels
     word_to_label,label_to_word = get_word_dict()
-    
-    
+
+
     # Set Sample Rate and file length
     sr = 16000
     file_length = 16000
 
     # Load filenames from previously generated lists
 
-    training_files = read_list(path_dataset,'training_files.txt')
-    validation_files = read_list(path_dataset,'validation_files.txt')
-    testing_files = read_list(path_dataset,'testing_files.txt')
-    
+    training_files = read_list(path,'training_files.txt')
+    validation_files = read_list(path,'validation_files.txt')
+    testing_files = read_list(path,'testing_files.txt')
+
     # Load files
 
     print("Loading Files:")
 
-    x_train,y_train = load_data(training_files,sr,file_length,path_dataset,word_to_label)
-    x_val,y_val = load_data(validation_files,sr,file_length,path_dataset,word_to_label)
-    x_test,y_test = load_data(testing_files,sr,file_length,path_dataset,word_to_label)
+    x_train,y_train = load_data(training_files,sr,file_length,path,word_to_label)
+    x_val,y_val = load_data(validation_files,sr,file_length,path,word_to_label)
+    x_test,y_test = load_data(testing_files,sr,file_length,path,word_to_label)
 
     # Load backgrounds separately split and append into partitions
 
-    backgrounds = partition_directory(path_dataset,'_background_noise_',sr,file_length)
+    backgrounds = partition_directory(path,'_background_noise_',sr,file_length)
 
     x_train,y_train = append_examples(x_train,y_train,backgrounds[:300],11)
     x_val,y_val = append_examples(x_val,y_val,backgrounds[300:320],11)
@@ -66,7 +75,7 @@ def main(path_dataset):
     N_test, _ = x_test.shape
 
     n_classes = len(np.unique(y_train))
-    
+
     y_train_oh = make_oh(y_train)
     y_val_oh = make_oh(y_val)
     y_test_oh = make_oh(y_test)
@@ -87,5 +96,5 @@ def main(path_dataset):
            batch_size=256, epochs = 10,
            validation_data=[x_val,y_val_oh])
 
-main(path)
-
+if __name__ == '__main__':
+    main()
