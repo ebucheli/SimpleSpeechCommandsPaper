@@ -7,7 +7,7 @@ from os.path import isdir, join, dirname
 from pathlib import Path
 import re
 import hashlib
-from tqdm import tqdm_notebook
+from tqdm import tqdm
 
 MAX_NUM_WAVS_PER_CLASS = 2**27 - 1  # ~134M
 
@@ -329,7 +329,7 @@ def load_data(file_names,sr,file_length,path_lib,word_to_label):
     x = np.zeros((len(file_names),file_length))
     y = np.zeros(len(file_names))
 
-    for i,file in enumerate(tqdm_notebook(file_names)):
+    for i,file in enumerate(tqdm(file_names)):
         key = os.path.dirname(file)
         path = path_lib+'/'+file
         samples,_ = librosa.load(path,sr=sr)
