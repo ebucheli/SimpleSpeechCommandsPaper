@@ -12,6 +12,10 @@ from Utilities import make_oh
 from RNNetworks import CRNN1_1D
 from tensorflow.keras.optimizers import Adam
 
+import sys
+
+path = sys.argv[1]
+
 def main(path_dataset):
     
     #Load dicts with commands and labels
@@ -83,5 +87,5 @@ def main(path_dataset):
            batch_size=256, epochs = 10,
            validation_data=[x_val,y_val_oh])
 
-main('/home/edoardobucheli/TFSpeechCommands/train/audio')
+main(path)
 
