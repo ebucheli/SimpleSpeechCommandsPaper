@@ -19,7 +19,7 @@ import sys
 import click
 
 @click.command()
-@click.option('--path',default = '/home/edoardobucheli/TFSpeechCommands/train/audio',help='Path to the dataset')
+@click.argument('path')
 @click.option('--problem', default = 0, help ='Version of the problem:\n\t0:10 words\n\t1:20 words\n\t2:Left/Right')
 @click.option('--transformation',default = 0,
               help = 'The transformation to apply:\n0:Waveform\n1:Spectrogram \n2:Mel Spectrogram\n3:MFCC')

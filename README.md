@@ -27,12 +27,13 @@ Using `main.py` you can create a model with a combination of these two aspects. 
 
 ## Usage
 
-You can execute using `python main.py [OPTIONS]` from the command line.
+You can execute using `python main.py [OPTIONS] PATH` from the command line.
+
+You need to specify `PATH` to point where the data set is in your system. It expects the directory with the subfolders for every word i.e. `/yes`,`/no`, etc.
 
 You can use the `--help` flag to learn about the usage. Below is a description of the available options.
 
-* `--path [the path to the dataset in your system]`: use this flag to point where the data set is in your system. It expects the directory with the subfolders for every word i.e. `/yes`,`/no`, etc.
-* `--problem [INTEGER]`: Select the version of the problem, here you can choose between classifying 10 words (plus unknown and silence) (0), 20 words (plus unknown and silence) (1) and 2Words (Left/Right) (plus unknown and silence) (2).
+* `--problem [INTEGER]`: Select the version of the problem, here you can choose between classifying 10 words (plus unknown and silence) (0), 20 words (plus unknown and silence) (1) and 2Words (Left/Right) (plus unknown and silence) (2). If you choose 10 Words you need v0.01 of the dataset.
 * `--transformation [INTEGER]`: Select the input representation; Waveform (0), Power Spectrogram (1), Mel Spectrogram (2), or MFCC (3).
 * `--mels [INTEGER]`: Choose the Frequency resolution for Mel Spectrograms and MFCC (either 40, 80 or 120).
 * `--network [INTEGER]`: Choose the Architecture, use `--help` for a breakdown.
