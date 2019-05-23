@@ -3,9 +3,8 @@ from tensorflow.keras.layers import GlobalMaxPool1D, GlobalMaxPool2D, Flatten, D
 from tensorflow.keras.layers import Add, ZeroPadding2D, AvgPool2D, Lambda
 from tensorflow.keras.callbacks import ModelCheckpoint
 from tensorflow.keras.models import Model, load_model, Sequential
-from tensorflow.keras.optimizers import Adam, RMSprop
 from tensorflow.keras.activations import relu, softmax
-from keras.backend import squeeze,stack, expand_dims
+from tensorflow.keras.backend import squeeze,stack, expand_dims
 
 def malley_cnn_40(input_shape, n_classes):
 
