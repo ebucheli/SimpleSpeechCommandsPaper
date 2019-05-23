@@ -29,7 +29,6 @@ import click
 
 def main(path, problem, transformation,mels, network, train, epochs):
 
-
     # Check that the representation and network match
 
     check_combination(transformation,network)
@@ -48,10 +47,8 @@ def main(path, problem, transformation,mels, network, train, epochs):
 
     # Load files
 
-
     x_train,y_train,x_val,y_val,x_test,y_test = load_dataset(training_files,validation_files,testing_files,
                                                              sr,file_length,path,word_to_label,problem)
-
 
     # Show status
     print("\nFiles and backgrounds loaded!\n")
@@ -76,8 +73,7 @@ def main(path, problem, transformation,mels, network, train, epochs):
     print('\nDone! Input Shape: {}\n'.format(input_shape))
 
     n_classes = len(np.unique(y_train))
-
-    print(n_classes)
+    print('Number of classes: {}\n'.format(n_classes))
 
     y_train_oh = make_oh(y_train)
     y_val_oh = make_oh(y_val)
@@ -86,9 +82,7 @@ def main(path, problem, transformation,mels, network, train, epochs):
     # Create Model
 
     lr = 0.001
-
     model = choose_network(network,input_shape,n_classes)
-
     print('Model Created:')
     model.summary()
     print('\n\n')
