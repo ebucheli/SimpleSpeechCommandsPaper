@@ -49,3 +49,7 @@ There are defaults for all the options, if you run, `python main.py` the model w
 If you want to use a Mel Spectrogram with a frequency resolution of 80 on the 20 word problem and the CRNN1-2D architecture and save the weights you can run,
 
 `python main.py --problem 1 --transformation 2 --mels 80 --network 7 --save_w --outfile "example_weights.h5"`
+
+You can also use pre-trained weights either created by you or from some of our previously generated one in `trained_weights`. The package assumes the file is in said directory;
+
+`python main.py --no_train --weights_file 'WF_CNN1D_10Words.h5'`
