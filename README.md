@@ -30,7 +30,7 @@ Using `main.py` you can create a model with a combination of these two aspects. 
 
 You can execute `python main.py [options]` from the command line, using `python main.py --help` the following appears:
 
-Usage: main.py [OPTIONS]
+`Usage: main.py [OPTIONS]
 
 Options:
   --path TEXT               Path to the dataset
@@ -62,4 +62,6 @@ Options:
                             directory.
   --epochs INTEGER          How many epoch to train the model for
   --save_w                  Use flag to save the weights of the model.
-  --outfile TEXT            If weights are saved, the name of the outpu
+  --outfile TEXT            If weights are saved, the name of the output file
+  --help                    Show this message and exit.
+`
