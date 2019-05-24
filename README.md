@@ -54,3 +54,7 @@ If you want to use a Mel Spectrogram with a frequency resolution of 80 on the 20
 You can also use pre-trained weights either created by you or from some of our previously generated one in `trained_weights`. The package assumes the file is in said directory;
 
 `python main.py --no_train --weights_file 'WF_CNN1D_10Words.h5'`
+
+## Requirements
+
+The models were created using Python 3.6 with Keras using the TensorFlow backend. You will also need the [Librosa](https://librosa.github.io/librosa/) package. Other dependencies includes the [tqdm](https://tqdm.github.io/) package.
