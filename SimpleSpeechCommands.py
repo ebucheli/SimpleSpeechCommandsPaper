@@ -97,20 +97,20 @@ def which_fold(filename, folds = 10):
     percentage_hash = ((int(hash_name_hashed, 16) %
                       (MAX_NUM_WAVS_PER_CLASS + 1)) *
                      (100.0 / MAX_NUM_WAVS_PER_CLASS))
-    
-    
+
+
     for i in range(1,11):
         if percentage_hash<folds*i:
             result = i-1
             break
-            
+
     return result
 
 def get_folds(path_dataset,folds = 10):
-    
+
     dirs = [f for f in os.listdir(path_dataset) if isdir(join(path_dataset, f))]
-    dirs.sort()  
-    
+    dirs.sort()
+
     fold0 = []
     fold1 = []
     fold2 = []
@@ -121,9 +121,9 @@ def get_folds(path_dataset,folds = 10):
     fold7 = []
     fold8 = []
     fold9 = []
-    
-        
-    for direct in dirs:    
+
+
+    for direct in dirs:
 
         if direct == '_background_noise_':
             pass
@@ -142,19 +142,19 @@ def get_folds(path_dataset,folds = 10):
                 elif this == 3:
                     fold3.append(direct+"/"+wave)
                 elif this == 4:
-                    fold4.append(direct+"/"+wave) 
+                    fold4.append(direct+"/"+wave)
                 elif this == 5:
                     fold5.append(direct+"/"+wave)
                 elif this == 6:
                     fold6.append(direct+"/"+wave)
                 elif this == 7:
-                    fold7.append(direct+"/"+wave) 
+                    fold7.append(direct+"/"+wave)
                 elif this == 8:
-                    fold8.append(direct+"/"+wave)             
+                    fold8.append(direct+"/"+wave)
                 elif this == 9:
                     fold9.append(direct+"/"+wave)
-                    
-                
+
+
     return [fold0,fold1,fold2,fold3,fold4,fold5,fold5,fold7,fold8,fold9]
 
 
@@ -164,15 +164,16 @@ def get_word_dict():
     """
     word_to_label = {'yes':0,'no':1,'up':2,'down':3,'left':4,'right':5,
                  'on':6,'off':7,'stop':8,'go':9,
-                 'bed':10,'bird':10,'cat':10,'dog':10,'happy':10,
-                 'house':10,'marvin':10,'sheila':10,'tree':10,'wow':10,
+                 'backward':10, 'bed':10,'bird':10,'cat':10,'dog':10,
+                 'follow':10,'forward':10,'happy':10,'house':10,'learn':10,
+                 'marvin':10,'sheila':10,'tree':10,'visual':10,'wow':10,
                  'zero':10,'one':10,'two':10,'three':10,'four':10,
                  'five':10,'six':10,'seven':10,'eight':10,'nine':10}
 
     label_to_word = dict([[v,k] for k,v in word_to_label.items()])
     label_to_word[10] = '<unk>'
     label_to_word[11] = '<silence>'
-    
+
     return word_to_label,label_to_word
 
 
@@ -192,7 +193,7 @@ def get_word_dict_v2():
     label_to_word = dict([[v,k] for k,v in word_to_label.items()])
     label_to_word[20] = '<unk>'
     label_to_word[21] = '<silence>'
-    
+
     return word_to_label,label_to_word
 
 
@@ -212,7 +213,7 @@ def get_word_dict_2words():
     label_to_word = dict([[v,k] for k,v in word_to_label.items()])
     label_to_word[2] = '<unk>'
     label_to_word[3] = '<silence>'
-    
+
     return word_to_label,label_to_word
 
 
@@ -220,24 +221,24 @@ def get_dataset_partition(path_lib,val_percent,test_percent):
     """ Returns three lists contining the files for the training,
     validation and testing sets. This function makes sure that speakers
     don't appear accross sets.
-    
+
     Parameters:
     path_lib: path to the directories containing the audio files.
     val_percent: percentage of the dataset to be included in the validation set.
     test_percent: percentage of the dataset to be included in the testing set.
-    
+
     Returns:
     training_files, validation_files, testing_files: lists containing the filenames
     for each set.
     """
     dirs = [f for f in os.listdir(path_lib) if isdir(join(path_lib, f))]
-    dirs.sort()    
-    
+    dirs.sort()
+
     training_files = []
     validation_files = []
     testing_files = []
 
-    for direct in dirs:    
+    for direct in dirs:
         if direct == '_background_noise_':
             pass
         else:
@@ -251,46 +252,46 @@ def get_dataset_partition(path_lib,val_percent,test_percent):
                 elif this == 'testing':
                     testing_files.append(direct+'/'+wave)
     return training_files,validation_files, testing_files
-   
+
 def reduce_examples(set_names,label,keep_prob,word_to_label):
     """Reduce the number of examples in a class
-    
+
     Parameters:
     set_names: a list containing the names of the files to be imported,
     the format should be "[label]/[filename].wav get_dataset_partition()
     label: The class label to reduce, integer.
     keep_prob: The percentage to keep from the class
-    
+
     Returns:
     A reduced list
     """
     to_del = []
-    
+
     for i, filename in enumerate(set_names):
-        
+
         direct = dirname(filename)
-        
+
         if word_to_label[direct] == label:
             if np.random.choice([0,1],None,p = [keep_prob,1-keep_prob]):
                 to_del.append(i)
     return np.delete(set_names,to_del)
-  
+
 def check_label_dist(set_names,word_to_label,label_to_word,labels):
     """Return a dictionary showing the number of examples for each class.
     """
     y = []
     dist = {}
-    
-    for i, filename in enumerate(set_names):    
+
+    for i, filename in enumerate(set_names):
         label = word_to_label[dirname(filename)]
         y.append(label)
-    
+
     y = np.array(y)
-    
+
     for i in range(labels):
         frequency = np.sum(y==i)
         dist[label_to_word[i]] = frequency
-    return dist     
+    return dist
 
 def export_partition_file(set_names,target_filename):
     """Export a .txt file from a list containing a partition of the set
@@ -298,18 +299,18 @@ def export_partition_file(set_names,target_filename):
     with open(target_filename, 'w') as f:
         for item in set_names:
             f.write("%s\n" % item)
-    
+
 def read_list(path_dataset,filename):
     """Return a list with the filenames in the given file
     """
     with open(path_dataset+'/'+filename) as f:
         lines = f.read().splitlines()
-    
+
     return lines
-    
+
 def load_data(file_names,sr,file_length,path_lib,word_to_label):
     """Loads data from a list obtained with get_dataset_partition()
-    
+
     Parameters:
     file_names: a list containing the names of the files to be imported,
     the format should be "[label]/[filename].wav get_dataset_partition()
@@ -318,14 +319,14 @@ def load_data(file_names,sr,file_length,path_lib,word_to_label):
     file_length: The size for the files, if a loaded file is not the same
     as file_length it will be zero padded or truncated accordingly.
     path_lib: path to the directories containing the audio files.
-    word_to_label: Dictonary that maps the words to the labels.Check 
+    word_to_label: Dictonary that maps the words to the labels.Check
     get_word_dict()
-    
+
     Returns: the examples x, and the labels y.
     """
-    
+
     N = len(file_names)
-    
+
     x = np.zeros((len(file_names),file_length))
     y = np.zeros(len(file_names))
 
@@ -347,22 +348,22 @@ def load_data(file_names,sr,file_length,path_lib,word_to_label):
 
 def remove_extra(x,y,target_size,label_num):
     """Reduces the examples of a class to target_size.
-    
-    Parameters: 
+
+    Parameters:
     x: The set to reduce
     y: The labels of the set to reduce
     target_size: How many examples to keep
     label_num: Which label to reduce
-    
+
     Returns:
     The reduced versions of x and y.
     """
-    
+
     rem_size = np.sum(y==label_num)-target_size
     to_rem = np.random.choice(np.where(y==label_num)[0],rem_size,replace = False)
     x = np.delete(x,to_rem,axis=0)
     y = np.delete(y,to_rem,axis=0)
-    
+
     return x,y
 
 def files_in_dir(path_lib,direct):
@@ -370,12 +371,12 @@ def files_in_dir(path_lib,direct):
 
 def load_direct(path_lib,direct,sr):
     """Load all the files on a directory
-    
-    Parameters: 
+
+    Parameters:
     path_lib: The path to the dataset
     direct: The name of the directory to load
     sr: Sample Rate
-    
+
     Returns:
     A list containing each of the waveforms (might be different sizes).
     """
@@ -384,58 +385,58 @@ def load_direct(path_lib,direct,sr):
 
     for file in file_names:
         this_file,_ = librosa.load(path_lib+'/'+direct+'/'+file,sr = sr)
-    
+
         if file =='pink_noise.wav' or file == 'white_noise.wav':
             this_file*= 0.2
-  
+
         waveforms.append(this_file)
-        
+
     return waveforms
 
 def divide_file(wave,target_size,hop_length):
     """Divides a waveform into several smaller chunks.
-    
-    Parameters: 
+
+    Parameters:
     wave: The waveform
     target_size: size of the chunks
     hop_length: distance between the beginning of chunks.
-    
+
     Returns:
     A list of waveforms of size target_size taken from wave.
     """
     this_back_batch = []
-    
+
     file_size = len(wave)
     frames = int((file_size-target_size)/hop_length)+1
 
     for i in range(frames):
-        
+
         start_ind = i*hop_length
         stop_ind = start_ind+target_size
         this_wave = wave[start_ind:stop_ind]
         this_back_batch.append(this_wave)
-        
+
     return np.array(this_back_batch)
 
 
 def partition_directory(path_lib,direct,sr,file_len):
     """ Obtain partitions for all the examples in a directory into several examples
     with a fixed length.
-    
+
     Parameters:
     path_lib: The path to the dataset.
     direct: The directory to collect the examples from
     sr: Sample Rate
     file_len: Length of the chunks
-    
+
     Returns:
     List with partitioned waveforms
     """
-    
+
     examples = np.zeros((1,file_len))
 
     files = load_direct(path_lib,direct,sr)
-    
+
     for i, wave in enumerate(files):
         this_batch = divide_file(wave,file_len,file_len)
         examples = np.concatenate((this_batch,examples),axis = 0)
@@ -455,6 +456,5 @@ def append_examples(x,y,values,label):
     """
     x = np.append(x,values = values,axis = 0)
     y = np.append(y,values = np.ones((len(values)))*label,axis = 0)
-    
+
     return x,y
-           
