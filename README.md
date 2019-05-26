@@ -47,16 +47,16 @@ You can use the `--help` flag to learn about the usage. Below is a description o
 
 We have provided 10 different Artificial Neural Network architectures. The first three are meant for waveforms and thus can't be used with time-frequency representations, the inverse is true for the final seven networks.
 
-1. CNN 1D: Taken from [https://www.kaggle.com/fizzbuzz/beginner-s-guide-to-audio-data](here).
-1. CRNN 1D: This network was inspired by [https://arxiv.org/abs/1703.05390](this paper) but applied to waveforms.
-1. attRNN 1D: Same as before but with [https://arxiv.org/abs/1808.08929](this paper)
-1. FCNN: Baseline model described [https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43969.pdf](here)
-1. O'Malley: This model was proposed by the second place winner of the TensorFlow Speech Recognition Challenge in Kaggle, Thomas O'Malley. He explains it [https://www.kaggle.com/c/tensorflow-speech-recognition-challenge/discussion/47715](here).
+1. CNN 1D: Taken from [here](https://www.kaggle.com/fizzbuzz/beginner-s-guide-to-audio-data).
+1. CRNN 1D: This network was inspired by [this paper](https://arxiv.org/abs/1703.05390) but applied to waveforms.
+1. attRNN 1D: Same as before but with [this paper](https://arxiv.org/abs/1808.08929).
+1. FCNN: Baseline model described [here](https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43969.pdf)
+1. O'Malley: This model was proposed by the second place winner of the TensorFlow Speech Recognition Challenge in Kaggle, Thomas O'Malley. He explains it [here](https://www.kaggle.com/c/tensorflow-speech-recognition-challenge/discussion/47715).
 1. CNN_TRAD_FPOOL3: From the same paper as FCNN.
 1. CNN_ONE_FSTRIDE4: From the same paper as FCNN and CNN_TRAD_FPOOL3.
 1. CRNN1 2D: This is on of the networks from the same paper as the one referenced in CRNN 1D.
 1. CRNN2 2D: Same as CRNN1 2D.
-1. attRNN 2D: This network was the one proposed in the paper referenced in attRNN 1D and you can also find it [https://github.com/douglas125/SpeechCmdRecognition](here).
+1. attRNN 2D: This network was the one proposed in the paper referenced in attRNN 1D and you can also find it [here](https://github.com/douglas125/SpeechCmdRecognition).
 
 ## Examples
 
