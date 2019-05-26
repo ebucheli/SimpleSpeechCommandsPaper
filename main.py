@@ -15,7 +15,7 @@ import click
 @click.command()
 @click.argument('path')
 @click.option('--problem', default = 0, help ='Version of the problem:\n\t0:10 words\n\t1:20 words\n\t2:Left/Right')
-@click.option('--transformation',default = 0,
+@click.option('--transformation',default = -1,
               help = 'The transformation to apply:\n0:Waveform\n1:Spectrogram \n2:Mel Spectrogram\n3:MFCC')
 @click.option('--mels',default = 40,help = 'Frequency resolution for Mel Spectrogram and MFCC')
 @click.option('--network',default = 1,
@@ -29,6 +29,12 @@ import click
 def main(path, problem, transformation,mels, network, train, weights_file, epochs, save_w, outfile):
 
     # Check that the representation and network match
+
+    if transformation == -1:
+        if network >= 0 and network < 3:
+            transformation = 0
+        else:
+            transformation = 2
 
     check_combination(transformation,network)
 
@@ -116,7 +122,7 @@ def main(path, problem, transformation,mels, network, train, weights_file, epoch
 
     conf_matrix = confusion_matrix(y_test,y_preds)
     report = classification_report(y_test,y_preds,target_names = target_names)
-    print('\nAccuracy: {:.2f}%'.format(accuracy*100))
+    print('\nTest Accuracy: {:.2f}%'.format(accuracy*100))
     print('\nConfusion Matrix:\n')
     print(conf_matrix)
     print('\nClassification Report\n')

@@ -34,7 +34,7 @@ You need to specify `PATH` to point where the data set is in your system. It exp
 You can use the `--help` flag to learn about the usage. Below is a description of the available options.
 
 * `--problem [INTEGER]`: Select the version of the problem, here you can choose between classifying 10 words (plus unknown and silence) (0), 20 words (plus unknown and silence) (1) and 2Words (Left/Right) (plus unknown and silence) (2). If you choose 10 Words you need v0.01 of the dataset.
-* `--transformation [INTEGER]`: Select the input representation; Waveform (0), Power Spectrogram (1), Mel Spectrogram (2), or MFCC (3).
+* `--transformation [INTEGER]`: Select the input representation; Waveform (0), Power Spectrogram (1), Mel Spectrogram (2), or MFCC (3). If no transformation is specified, Waveforms will be used for Networks 0, 1 and 2 and MS-40 for the rest.
 * `--mels [INTEGER]`: Choose the Frequency resolution for Mel Spectrograms and MFCC (either 40, 80 or 120).
 * `--network [INTEGER]`: Choose the Architecture, use `--help` for a breakdown.
 * `--train/--no_train`:  If you wish to use pre-trained weights, use `--no_train`. If so please specify the file using `--weights_file`.
