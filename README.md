@@ -16,7 +16,7 @@ You can find four basic types of Neural Network Architectures in this repository
 1. 2D Convnets (in `CNNetworks2D.py`)
 1. CRNN (in `RNNetworks.py`)
 
-There are also four basic input representations for audio.
+There are also four basic input representations for audio. 2, 3 and 4 are all based in the Fourier Transform and are all time-frequency representations.
 
 1. Waveforms
 1. Power Spectrograms
@@ -36,12 +36,27 @@ You can use the `--help` flag to learn about the usage. Below is a description o
 * `--problem [INTEGER]`: Select the version of the problem, here you can choose between classifying 10 words (plus unknown and silence) (0), 20 words (plus unknown and silence) (1) and 2Words (Left/Right) (plus unknown and silence) (2). If you choose 10 Words you need v0.01 of the dataset.
 * `--transformation [INTEGER]`: Select the input representation; Waveform (0), Power Spectrogram (1), Mel Spectrogram (2), or MFCC (3). If no transformation is specified, Waveforms will be used for Networks 0, 1 and 2 and MS-40 for the rest.
 * `--mels [INTEGER]`: Choose the Frequency resolution for Mel Spectrograms and MFCC (either 40, 80 or 120).
-* `--network [INTEGER]`: Choose the Architecture, use `--help` for a breakdown.
+* `--network [INTEGER]`: Choose the Architecture, check next section or use `--help` for a breakdown.
 * `--train/--no_train`:  If you wish to use pre-trained weights, use `--no_train`. If so please specify the file using `--weights_file`.
 * `--weights_file [TEXT]`: Name of the file with the pre-trained weights, the package assumes it is in `trained_weights`. Use `--no_train`.
 * `--epochs [INTEGER]`: Specify the number of epochs.
 * `--save_w`: Use this flag to save the weights after the model has been trained. Please specify the name of the file using `--outfile`
 * `--outfile [TEXT]`: Specify the name of the output file with the weights.
+
+## Networks
+
+We have provided 10 different Artificial Neural Network architectures. The first three are meant for waveforms and thus can't be used with time-frequency representations, the inverse is true for the final seven networks.
+
+1. CNN 1D: Taken from [https://www.kaggle.com/fizzbuzz/beginner-s-guide-to-audio-data](here).
+1. CRNN 1D: This network was inspired by [https://arxiv.org/abs/1703.05390](this paper) but applied to waveforms.
+1. attRNN 1D: Same as before but with [https://arxiv.org/abs/1808.08929](this paper)
+1. FCNN: Baseline model described [https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/43969.pdf](here)
+1. O'Malley: This model was proposed by the second place winner of the TensorFlow Speech Recognition Challenge in Kaggle, Thomas O'Malley. He explains it [https://www.kaggle.com/c/tensorflow-speech-recognition-challenge/discussion/47715](here).
+1. CNN_TRAD_FPOOL3: From the same paper as FCNN.
+1. CNN_ONE_FSTRIDE4: From the same paper as FCNN and CNN_TRAD_FPOOL3.
+1. CRNN1 2D: This is on of the networks from the same paper as the one referenced in CRNN 1D.
+1. CRNN2 2D: Same as CRNN1 2D.
+1. attRNN 2D: This network was the one proposed in the paper referenced in attRNN 1D and you can also find it [https://github.com/douglas125/SpeechCmdRecognition](here).
 
 ## Examples
 
