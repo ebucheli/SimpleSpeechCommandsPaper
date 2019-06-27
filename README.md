@@ -9,6 +9,8 @@ The name of the paper is "Deteccion de Comandos de Voz con Modelos Compactos de 
 
 This research was a comparative study of audio representations and artificial neural networks.
 
+<img src="./pics/DLPipeline.png" width="95%">
+
 You can find four basic types of Neural Network Architectures in this repository.
 
 1. MLP (in `FFNetworks.py`)
