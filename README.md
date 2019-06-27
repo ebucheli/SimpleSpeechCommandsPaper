@@ -9,7 +9,7 @@ The name of the paper is "Deteccion de Comandos de Voz con Modelos Compactos de 
 
 This research was a comparative study of audio representations and artificial neural networks.
 
-<img src="./pics/DLPipeline.png" width="95%">
+<img src="./pics/DLPipeline.png" width="70%">
 
 You can find four basic types of Neural Network Architectures in this repository.
 
@@ -25,7 +25,7 @@ There are also four basic input representations for audio. 2, 3 and 4 are all ba
 1. Mel Spectrograms
 1. Mel Frequency Cepstral Coefficients (MFCC)
 
-<img src="./pics/comparison_4.png" width="95%">
+<img src="./pics/comparison_4.png" width="60%">
 
 Using `main.py` you can create a model with a combination of these two aspects. However, architectures made for waveforms are only compatible with waveforms.
 
