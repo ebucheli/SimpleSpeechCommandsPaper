@@ -23,6 +23,8 @@ There are also four basic input representations for audio. 2, 3 and 4 are all ba
 1. Mel Spectrograms
 1. Mel Frequency Cepstral Coefficients (MFCC)
 
+<img src="./pics/comparison_4.png" width="95%">
+
 Using `main.py` you can create a model with a combination of these two aspects. However, architectures made for waveforms are only compatible with waveforms.
 
 ## Usage
